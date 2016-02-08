@@ -1,0 +1,46 @@
+{
+  "name": "bitrix-project-stub",
+  "version": "0.1.0",
+  "description": "Bitrix CMS Project Starter Kit",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janitorial/bitrix-project-stub.git"
+  },
+  "author": "v.kryukov@regiomedia.ru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janitorial/bitrix-project-stub/issues"
+  },
+  "homepage": "https://github.com/janitorial/bitrix-project-stub#readme",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
+    "del": "^2.2.0",
+    "event-stream": "^3.3.2",
+    "glob": "^6.0.4",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-changed": "^1.3.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "^2.3.0",
+    "imagemin-pngquant": "^4.2.0",
+    "nib": "^1.1.0",
+    "require-dir": "^0.3.0",
+    "require-globify": "^1.3.0",
+    "rupture": "^0.6.1",
+    "vinyl-source-stream2": "^0.1.1"
+  },
+  "dependencies": {
+    "jquery": "^2.2.0"
+  }
+}
