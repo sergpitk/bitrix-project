@@ -9,7 +9,7 @@ import glob from 'glob';
 
 
 gulp.task('scripts', (done) => (
-    glob('src/local/templates/*/*.js',  function(err, files) {
+    glob('src/*/local/templates/*/*.js',  function(err, files) {
         if(err) done(err);
 
         var tasks = files.map(function(entry) {

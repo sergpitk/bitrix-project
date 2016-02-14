@@ -5,7 +5,7 @@ import changed from 'gulp-changed';
 import plumber from 'gulp-plumber';
 
 gulp.task('images', () => (
-    gulp.src(['src/**/*.{jpg,png,gif}', '!src/local/*/sprites/**/*.*'], {base: 'src'})
+    gulp.src(['src/**/*.{jpg,png,gif}', '!src/*/local/*/sprites/**/*.*'], {base: 'src'})
         .pipe(changed('dist'))
         .pipe(plumber())
         .pipe(imagemin({

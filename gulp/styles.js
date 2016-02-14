@@ -6,7 +6,7 @@ import rupture from 'rupture';
 import nib from 'nib';
 
 gulp.task('styles', () => (
-    gulp.src('src/local/templates/*/*.styl', {base: 'src'})
+    gulp.src('src/*/local/templates/*/*.styl', {base: 'src'})
         .pipe(plumber())
         .pipe(stylus({
             use: [
