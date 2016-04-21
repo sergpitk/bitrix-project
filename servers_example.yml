@@ -1,0 +1,19 @@
+dev:
+    host: hostname
+    port: 22
+    user: username
+    password: password
+    stage: dev
+    deploy_path: /var/www
+    branch: master
+    parent_files_path: /path/to/parent/server
+    parent_dbname: dbname
+    parent_dbuser: dbuser
+    parent_dbpass: dbpass
+    parent_dbhost: localhost
+    app:
+      mysql:
+        host: localhost
+        username: dbuser
+        dbname: dbname
+        password: dbpass
