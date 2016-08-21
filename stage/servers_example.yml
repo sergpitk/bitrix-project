@@ -1,0 +1,14 @@
+dev:
+    host: hostname
+    port: 22
+    user: hostname
+    password: w33rryy5tr0n9
+    stage: dev
+    deploy_path: /home/hostname/public_html
+    branch: master
+    app:
+      mysql:
+        host:
+        username:
+        dbname:
+        password:
