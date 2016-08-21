@@ -1,0 +1,9 @@
+
+/core/bitrix
+/core/upload
+
+/node_modules/
+/bower_components/
+/vendor/
+*.log
+/stage/servers.yml
