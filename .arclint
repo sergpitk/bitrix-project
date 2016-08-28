@@ -1,0 +1,19 @@
+{
+  "linters": {
+    "phpSyntax": {
+      "type": "php",
+      "include": "(\\.php$)"
+    },
+    "json": {
+      "type": "json",
+      "include": [
+        "(^\\.arcconfig$)",
+        "(^\\.arclint$)",
+        "(\\.json$)"
+      ]
+    },
+    "merge-conflict": {
+      "type": "merge-conflict"
+    }
+  }
+}
