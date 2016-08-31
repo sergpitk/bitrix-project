@@ -1,5 +1,6 @@
 {
     "require": {
-        "deployphp/recipes": "^3.1"
+        "deployphp/recipes": "^3.1",
+        "arrilot/bitrix-migrations": "^2.2"
     }
 }
