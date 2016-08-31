@@ -4,6 +4,14 @@
       "type": "php",
       "include": "(\\.php$)"
     },
+    "phpcs": {
+        "type": "phpcs",
+        "include": "(^core/local/.*\\.php$)",
+        "phpcs.standard": "PSR2",
+        "severity": {
+            "PHPCS.W.Generic.Files.LineLength.TooLong": "advice"
+        }
+    },
     "json": {
       "type": "json",
       "include": [
