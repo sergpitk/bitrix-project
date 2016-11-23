@@ -12,8 +12,8 @@ set('clear_paths', []);
 set('clear_use_sudo', false);
 set('keep_releases', 5);
 set('default_stage', 'dev');
-set('shared_dirs', ['src/s1/bitrix', 'src/s1/upload']);
-set('shared_files', ['']);
+set('shared_dirs', ['core/bitrix', 'core/upload']);
+set('shared_files', false);
 set('sync_excludes', ['cache', 'managed_cache', 'stack_cache', 'resize_cache', 'tmp', '.settings.php', '"php_interface/dbconn.php"']);
 set('sync_dirs', ['bitrix', 'upload']);
 
@@ -34,7 +34,7 @@ task(
         $sourceServer = $serverList[$sourceServerKey];
         $destServer = $serverList[env('server.name')];
 
-        runLocally("ssh {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table' | mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}", 0);
+        run("ssh {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table' | mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}", 0);
     }
 )->onlyOn('dev');
 
@@ -63,9 +63,7 @@ task(
                 $excludeString .= " --exclude=$exclude ";
             }
 
-            writeln("rsync -avz --delete {$sourceServer['user']}@${sourceServer['host']}:${sourceServer['webroot']}/$dir/ $destPath/$dir $excludeString");
-
-            runLocally("rsync -avz --delete {$sourceServer['user']}@${sourceServer['host']}:${sourceServer['webroot']}/$dir/ $destPath/$dir $excludeString", 0);
+            run("rsync -avz --delete {$sourceServer['user']}@${sourceServer['host']}:${sourceServer['webroot']}/$dir/ $destPath/$dir $excludeString", 0);
         }
     }
 );
@@ -77,6 +75,12 @@ task(
     'sync:db'
     ]
 );
+
+task('mv_local_config', function(){
+    run('mkdir -p ./core/bitrix/php_interface/');
+    run("mv ./shared/core/bitrix/php_interface/dbconn.php ./core/bitrix/php_interface/" );
+    run("mv ./shared/core/bitrix/.settings.php ./core/bitrix/" );
+})->onlyOn('dev');
 
 task(
     'deploy',
@@ -92,6 +96,8 @@ task(
     'cleanup',
     ]
 )->desc('Deploy your project');
+
+after('deploy:configure', 'mv_local_config');
 after('deploy', 'success');
 
 serverList(__DIR__.'/stage/servers.yml');
