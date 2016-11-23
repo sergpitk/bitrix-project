@@ -1,12 +1,11 @@
 parserOptions:
-    ecmaVersion: 6
-    sourceType: 'module'
+    ecmaVersion: 5
+    sourceType: 'script'
     ecmaFeatures:
         experimentalObjectRestSpread: true
 env:
-    es6: true
     browser: true
-    node: true
+    jquery: true
 rules:
     arrow-parens: [1, 'as-needed']
     arrow-spacing: [1, {before: true, after: true}]
@@ -34,7 +33,7 @@ rules:
     guard-for-in: 1
     handle-callback-err: 0
     id-length: [2, {min: 1, max: 30}]
-    indent: [2, 'tab', {SwitchCase: 1}]
+    indent: [4, 'spaces', {SwitchCase: 1}]
     key-spacing: [2, {beforeColon: false, afterColon: true}]
     lines-around-comment: 0
     linebreak-style: [0, 'unix']
@@ -138,7 +137,6 @@ rules:
     no-use-before-define: 2
     no-useless-call: 2
     no-void: 0
-    no-var: 2
     no-warning-comments: 0
     no-with: 2
     new-parens: 2
