@@ -34,7 +34,7 @@ task(
         $sourceServer = $serverList[$sourceServerKey];
         $destServer = $serverList[env('server.name')];
 
-        run("ssh {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table' | mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}", 0);
+        run(escapeshellcmd("ssh {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table' | mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}"), 0);
     }
 )->onlyOn('dev');
 
@@ -71,8 +71,8 @@ task(
 task(
     'sync',
     [
-    'sync:dirs',
-    'sync:db'
+        'sync:dirs',
+        'sync:db'
     ]
 );
 
@@ -85,15 +85,15 @@ task('mv_local_config', function(){
 task(
     'deploy',
     [
-    'deploy:prepare',
-    'deploy:release',
-    'deploy:update_code',
-    'deploy:shared',
-    'deploy:configure',
-    'deploy:vendors',
-    'deploy:symlink',
-    'deploy:clean',
-    'cleanup',
+        'deploy:prepare',
+        'deploy:release',
+        'deploy:update_code',
+        'deploy:shared',
+        'deploy:configure',
+        'deploy:vendors',
+        'deploy:symlink',
+        'deploy:clean',
+        'cleanup',
     ]
 )->desc('Deploy your project');
 
