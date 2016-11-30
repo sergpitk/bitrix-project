@@ -1,14 +1,37 @@
 dev:
-    host: hostname
+    host: awesome.bitrix-project.dev
     port: 22
-    user: hostname
-    password: w33rryy5tr0n9
+    user: username
     stage: dev
-    deploy_path: /home/hostname/public_html
     branch: master
+    local: true
     app:
       mysql:
-        host:
-        username:
-        dbname:
-        password:
+        host: localhost
+        username: awesome_db_username
+        dbname: awesome_db
+        password: awesome_db_password
+      cache: >
+        'cache' =>
+                    array(),
+staging:
+    host: awesome.bitrix-project.stg
+    port: 22
+    user: username_stg
+    identity_file:
+      public_key:  /home/username/.ssh/id_rsa.pub
+      private_key: /home/username/.ssh/id_rsa
+      password: ""
+    stage: staging
+    deploy_path: /path/to/deploy
+    branch: master
+    webroot: "/path/to/public_html"
+    app:
+      mysql:
+        host: localhost
+        username: awesome_db_username
+        dbname: awesome_db
+        password: awesome_db_password
+      cache: >
+        'cache' =>
+                    array(),
