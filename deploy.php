@@ -82,6 +82,12 @@ task('mv_local_config', function(){
     run("mv ./shared/core/bitrix/.settings.php ./core/bitrix/" );
 })->onlyOn('dev');
 
+task('deploy:migrate', function() {
+    cd('{{release_path}}');
+    $output = run( '{{bin/php}} migrator migrate');
+    writeln('<info>' . $output . '</info>');
+});
+
 task(
     'deploy',
     [
@@ -91,6 +97,7 @@ task(
         'deploy:shared',
         'deploy:configure',
         'deploy:vendors',
+        'deploy:migrate',
         'deploy:symlink',
         'deploy:clean',
         'cleanup',
