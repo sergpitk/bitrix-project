@@ -29,7 +29,7 @@
 ## Необходимое ПО:
 - [Git](https://git-scm.com/)
 - [Composer](https://getcomposer.org/)
-- [Deployer](https://deployer.org/)
+- [Deployer](https://deployer.org/) (Устанавливается локально как зависимость composer)
 - [Arcanist](https://phacility.com/phabricator/arcanist/) (опционально)
 - [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer) (опционально)
 - [ESlint](http://eslint.org/) (опционально)
@@ -69,7 +69,7 @@
 `staging` - тестовый сервер. На него предполагается "разворачивать" релизы.
 
 ```
-$ dep deploy staging
+$ ./vendor/bin/dep deploy staging
 ```
 
 Команда создаст следующую структуру на удаленном сервере
@@ -90,13 +90,13 @@ $ dep deploy staging
 Получить ядро (bitrix), ресурсы (upload) и базу c "дальнего" сайта:
 
 ```
-$ dep sync dev --source-server staging --dest-path core
+$ ./vendor/bin/dep sync dev --source-server staging --dest-path core
 ```
 
 Сгенерировать файлы конфигурации из шаблонов для работы сайта
 
 ```
-$ dep deploy:configure
+$ ./vendor/bin/dep deploy:configure
 ```
 
 ## Проверка кода на ошибки (Линтеры)
