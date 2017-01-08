@@ -2,11 +2,12 @@
 use Symfony\Component\Yaml\Yaml;
 
 require 'vendor/autoload.php';
-require 'recipe/common.php'; // assumes deployer installed globally
+require 'vendor/deployer/deployer/recipe/common.php'; // assumes deployer installed locally
+//require 'recipe/common.php'; // assumes deployer installed locally
 require 'vendor/deployphp/recipes/recipes/configure.php';
 
 // Set deployment configuration
-set('repository', '');
+set('repository', ''); // DON'T FORGET REPOSITORY URL
 set('writable_dirs', []);
 set('clear_paths', []);
 set('clear_use_sudo', false);
