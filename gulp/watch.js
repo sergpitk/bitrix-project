@@ -15,7 +15,12 @@ gulp.task('watch', () => {
             ], () => {
         runSequence('styles', bs.reload);
     });
+
     watch([
         path + '/images/**/*.*'
     ], () => runSequence('images', bs.reload));
+
+    watch([
+        path + '/scripts/**/*.js'
+    ], () => runSequence('scripts', bs.reload));    
 });

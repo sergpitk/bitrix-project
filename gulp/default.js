@@ -14,6 +14,7 @@ gulp.task('build', () => (
     runSequence(
         'clean',
         'styles',
-        'images'
+        'images',
+        'scripts',
     )
 ));
