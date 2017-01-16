@@ -35,7 +35,7 @@ task(
         $sourceServer = $serverList[$sourceServerKey];
         $destServer = $serverList[env('server.name')];
 
-        run(escapeshellcmd("ssh -p {$sourceServer['port']}  {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump --default-character-set=utf8 -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table' | mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}"), 0);
+        run(escapeshellcmd("ssh -p {$sourceServer['port']}  {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump --default-character-set=utf8 -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table'"). " | ". escapeshellcmd("mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}"), 0);
     }
 )->onlyOn('dev');
 
