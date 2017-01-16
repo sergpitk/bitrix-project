@@ -6,11 +6,12 @@
     },
     "phpcs": {
         "type": "phpcs",
-        "include": "(^core/local/.*\\.php$)",
+        "include": "(^core/local/classes/.*\\.php$)",
         "phpcs.standard": "PSR2",
         "severity": {
             "PHPCS.W.Generic.Files.LineLength.TooLong": "advice"
-        }
+        },
+        "bin": ["./vendor/bin/phpcs"]
     },
     "json": {
       "type": "json",

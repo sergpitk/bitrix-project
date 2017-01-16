@@ -3,5 +3,9 @@
         "deployer/deployer": "^3.3",
         "deployphp/recipes": "^3.1",
         "arrilot/bitrix-migrations": "^2.2"
+    },
+
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.*"
     }
 }
