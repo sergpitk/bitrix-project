@@ -22,18 +22,6 @@
     },
     "merge-conflict": {
       "type": "merge-conflict"
-    },
-    "eslint": {
-        "type": "script-and-regex",
-        "script-and-regex.script": "sh -c 'eslint \"$0\"  || true'",
-         "script-and-regex.regex": "/^(\\h+)(?P<line>\\d+):(?P<char>\\d+)(\\h+)(?P<severity>warning|error)(\\h+)(?P<message>.*)(\\h{2,})(?P<code>.*)$/m",
-        "include": "(\\.js$)"
-    },
-    "stylint": {
-        "type": "script-and-regex",
-        "script-and-regex.script": "sh -c 'stylint \"$0\"  || true'",
-        "script-and-regex.regex": "/^(?P<line>\\d+):?(?P<char>\\d*)(\\h?)(?P<code>.*)(\\h?)(?P<severity>warning|error)(\\h+)(?P<message>.*)$/m",
-        "include": "(\\.styl$)"
     }
   }
 }
