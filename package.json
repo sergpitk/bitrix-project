@@ -1,5 +1,5 @@
 {
-  "name": "bitrix-project-stub",
+  "name": "bitrix-project",
   "version": "0.0.1",
   "description": "BitrixCMS-based project's initial structure",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/regiomedia/bitrix-project-stub.git"
+    "url": "git+https://github.com/regiomedia/bitrix-project.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/regiomedia/bitrix-project-stub/issues"
+    "url": "https://github.com/regiomedia/bitrix-project/issues"
   },
-  "homepage": "https://github.com/regiomedia/bitrix-project-stub#readme",
+  "homepage": "https://github.com/regiomedia/bitrix-project#readme",
   "devDependencies": {
     "autoprefixer": "^6.6.1",
     "babel": "^6.5.0",
