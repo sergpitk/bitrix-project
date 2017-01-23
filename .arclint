@@ -6,7 +6,7 @@
     },
     "phpcs": {
         "type": "phpcs",
-        "include": "(^core/local/classes/.*\\.php$)",
+        "include": "/core\\/local\\/classes\\/.*\\.php/i",
         "phpcs.standard": "PSR2",
         "severity": {
             "PHPCS.W.Generic.Files.LineLength.TooLong": "advice"
