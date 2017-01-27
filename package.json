@@ -11,7 +11,9 @@
     "scripts": "gulp scripts --debug",
     "clean": "gulp clean",
     "lint:scripts": "eslint core/local/**/assets-raw/js/**/*.js ; exit 0",
-    "fix:scripts": "eslint core/local/**/assets-raw/js/**/*.js --fix; exit 0"
+    "lint:styles": "stylelint \"core/local/**/assets-raw/styles/**/*.css\" ; exit 0",
+    "fix:scripts": "eslint core/local/**/assets-raw/js/**/*.js --fix; exit 0",
+    "fix:styles": "stylefmt -r \"core/local/**/assets-raw/styles/**/*.css\" ; exit 0"
   },
   "repository": {
     "type": "git",
@@ -55,6 +57,9 @@
     "postcss-sprites": "^4.1.1",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.2",
+    "stylefmt": "^5.1.1",
+    "stylelint": "^7.7.1",
+    "stylelint-config-standard": "^15.0.1",
     "through2": "^2.0.3",
     "vinyl-source-stream2": "^0.1.1",
     "webpack": "^1.12.9",
