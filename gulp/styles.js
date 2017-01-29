@@ -24,7 +24,7 @@ let spritesCfg = {
 }
 
 gulp.task('styles', () => (
-        gulp.src('core/local/**/assets-raw/styles/*.css', {base: './'})
+        gulp.src('core/local/**/assets-raw/styles/*.pcss', {base: './'})
             .pipe(through.obj(function (file, enc, cb) {
                 spritesCfg.stylesheetPath = path.dirname(file.path).replace('assets-raw', 'assets-done');
                 spritesCfg.spritePath = spritesCfg.stylesheetPath.replace('styles', 'images');
@@ -40,6 +40,7 @@ gulp.task('styles', () => (
             ))
             .pipe(rename(function (path) {
                 path.dirname = path.dirname.replace('assets-raw', 'assets-done')
+                path.extname = '.css';
             }))
             .pipe(gulp.dest('./'))
 ));

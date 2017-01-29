@@ -11,7 +11,7 @@ gulp.task('watch', () => {
     global.watch = true;
 
     watch([
-            path + '/styles/**/*.css'
+            path + '/styles/**/*.pcss'
             ], () => {
         runSequence('styles', bs.reload);
     });
