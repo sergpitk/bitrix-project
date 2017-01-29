@@ -9,11 +9,11 @@ trim_trailing_whitespace = true
 [**.{js,php,css}]
 charset = utf-8
 
-[core/local/**/assets-raw/js/**.js]
+[core/local/**/assets-raw/scripts/**.es6]
 indent_style = space
 indent_size = 2
 
-[core/local/**/assets-raw/styles/**.css]
+[core/local/**/assets-raw/styles/**.pcss]
 indent_style = space
 indent_size = 2
 
