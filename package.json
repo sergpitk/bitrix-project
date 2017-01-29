@@ -10,9 +10,9 @@
     "images": "gulp images --debug",
     "scripts": "gulp scripts --debug",
     "clean": "gulp clean",
-    "lint:scripts": "eslint core/local/**/assets-raw/js/**/*.js ; exit 0",
+    "lint:scripts": "eslint \"core/local/**/assets-raw/js/**/*.js\" ; exit 0",
     "lint:styles": "stylelint \"core/local/**/assets-raw/styles/**/*.css\" ; exit 0",
-    "fix:scripts": "eslint core/local/**/assets-raw/js/**/*.js --fix; exit 0",
+    "fix:scripts": "eslint \"core/local/**/assets-raw/js/**/*.js\" --fix; exit 0",
     "fix:styles": "stylefmt -r \"core/local/**/assets-raw/styles/**/*.css\" ; exit 0"
   },
   "repository": {
@@ -38,6 +38,8 @@
     "browser-sync": "^2.18.6",
     "browserify": "^13.3.0",
     "eslint": "^3.14.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
     "event-stream": "^3.3.4",
     "glob": "^7.1.1",
     "gulp": "^3.9.0",
