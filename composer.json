@@ -7,5 +7,10 @@
 
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*"
+    },
+
+    "scripts": {
+        "lint:php": "php ./vendor/bin/phpcs --standard=PSR2  core/local/classes/**/*.php",
+        "fix:php": "php ./vendor/bin/phpcbf --standard=PSR2  core/local/classes/**/*.php"
     }
 }
