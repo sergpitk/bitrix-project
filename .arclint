@@ -28,7 +28,7 @@
       "type": "script-and-regex",
       "script-and-regex.script": "sh -c 'node ./node_modules/eslint/bin/eslint.js \"$0\"  || true'",
       "script-and-regex.regex": "/^(\\h+)(?P<line>\\d+):(?P<char>\\d+)(\\h+)(?P<severity>warning|error)(\\h+)(?P<message>.*)(\\h{2,})(?P<code>.*)$/m",
-      "include": "/core\\/local\\/.*\\/assets-raw\\/js\\/.*\\.js/i"
+      "include": "/core\\/local\\/.*\\/assets-raw\\/scripts\\/.*\\.es6/i"
     },
     "stylelint": {
       "type": "script-and-regex",

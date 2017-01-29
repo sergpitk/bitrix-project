@@ -8,7 +8,7 @@ import glob from 'glob';
 
 
 gulp.task('scripts', (done) => (
-    glob('core/local/**/assets-raw/scripts/*.js',  function(err, files) {
+    glob('core/local/**/assets-raw/scripts/*.es6',  function(err, files) {
         if(err) done(err);
 
         var tasks = files.map(function(entry) {
@@ -24,7 +24,8 @@ gulp.task('scripts', (done) => (
                 })
                 )
                 .pipe(rename(function (path) {
-                    path.dirname = path.dirname.replace('assets-raw', 'assets-done')
+                    path.dirname = path.dirname.replace('assets-raw', 'assets-done');
+                    path.extname = '.js';
                 }))
                 .pipe(gulp.dest('./'));
         });

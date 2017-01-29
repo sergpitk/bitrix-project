@@ -10,9 +10,9 @@
     "images": "gulp images --debug",
     "scripts": "gulp scripts --debug",
     "clean": "gulp clean",
-    "lint:scripts": "eslint \"core/local/**/assets-raw/js/**/*.js\" ; exit 0",
+    "lint:scripts": "eslint \"core/local/**/assets-raw/scripts/**/*.es6\" ; exit 0",
     "lint:styles": "stylelint \"core/local/**/assets-raw/styles/**/*.pcss\" ; exit 0",
-    "fix:scripts": "eslint \"core/local/**/assets-raw/js/**/*.js\" --fix; exit 0",
+    "fix:scripts": "eslint \"core/local/**/assets-raw/scripts/**/*.es6\" --fix; exit 0",
     "fix:styles": "stylefmt -r \"core/local/**/assets-raw/styles/**/*.pcss\" ; exit 0"
   },
   "repository": {

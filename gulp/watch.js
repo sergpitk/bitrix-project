@@ -21,6 +21,6 @@ gulp.task('watch', () => {
     ], () => runSequence('images', bs.reload));
 
     watch([
-        path + '/scripts/**/*.js'
+        path + '/scripts/**/*.es6'
     ], () => runSequence('scripts', bs.reload));    
 });
