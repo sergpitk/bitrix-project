@@ -29,10 +29,8 @@
 ## Необходимое ПО:
 - [Git](https://git-scm.com/)
 - [Composer](https://getcomposer.org/)
-- [Deployer](https://deployer.org/) (Устанавливается локально как зависимость composer)
+- [Node.js](https://nodejs.org/en/)
 - [Arcanist](https://phacility.com/phabricator/arcanist/) (опционально)
-- [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer) (опционально)
-- [ESlint](http://eslint.org/) (опционально)
 
 ## Быстрый старт:
 
