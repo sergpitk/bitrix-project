@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5a44cb5607fc48cfd6f82eb8f4a62ca3",
-    "content-hash": "a81b61542795998ad76232fdf10ae65a",
+    "hash": "70f3b0dcc2a0921724f17a3986b5a303",
+    "content-hash": "1967d634ff996ef0c5d0912b21d5d684",
     "packages": [
         {
             "name": "arrilot/bitrix-migrations",
@@ -282,16 +282,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.4.17",
+            "version": "v5.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "390b206d019f613740f2c88b633c2c2f1be6953e"
+                "reference": "86e9675e2699f7c912d552e0f5f1bbfb004095f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/390b206d019f613740f2c88b633c2c2f1be6953e",
-                "reference": "390b206d019f613740f2c88b633c2c2f1be6953e",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/86e9675e2699f7c912d552e0f5f1bbfb004095f6",
+                "reference": "86e9675e2699f7c912d552e0f5f1bbfb004095f6",
                 "shasum": ""
             },
             "require": {
@@ -325,10 +325,30 @@
                 "collection",
                 "laravel"
             ],
-            "time": "2017-04-03 18:48:07"
+            "time": "2017-04-12 03:26:03"
         }
     ],
     "packages-dev": [
+        {
+            "name": "regiomedia/deployer-recipe-check",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/regiomedia/deployer-recipe-check",
+                "reference": "master"
+            },
+            "type": "library"
+        },
+        {
+            "name": "regiomedia/deployer-recipe-sync",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/regiomedia/deployer-recipe-sync",
+                "reference": "master"
+            },
+            "type": "library"
+        },
         {
             "name": "squizlabs/php_codesniffer",
             "version": "2.8.1",
@@ -410,7 +430,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "regiomedia/deployer-recipe-check": 20,
+        "regiomedia/deployer-recipe-sync": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

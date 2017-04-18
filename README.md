@@ -29,6 +29,7 @@
 ## Необходимое ПО:
 - [Git](https://git-scm.com/)
 - [Composer](https://getcomposer.org/)
+- [Deployer 4.3^](https://deployer.org/)
 - [Node.js](https://nodejs.org/en/)
 - [Arcanist](https://phacility.com/phabricator/arcanist/) (опционально)
 
@@ -66,8 +67,10 @@
 
 `staging` - тестовый сервер. На него предполагается "разворачивать" релизы.
 
+`production` - основной сервер
+
 ```
-$ ./vendor/bin/dep deploy staging
+$ dep deploy staging
 ```
 
 Команда создаст следующую структуру на удаленном сервере
@@ -88,13 +91,7 @@ $ ./vendor/bin/dep deploy staging
 Получить ядро (bitrix), ресурсы (upload) и базу c "дальнего" сайта:
 
 ```
-$ ./vendor/bin/dep sync dev --source-server staging --dest-path core
-```
-
-Сгенерировать файлы конфигурации из шаблонов для работы сайта
-
-```
-$ ./vendor/bin/dep deploy:configure
+$ dep sync dev --source-server staging --dest-path core
 ```
 
 ## Проверка кода на ошибки (Линтеры)

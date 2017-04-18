@@ -1,87 +1,16 @@
 <?php
-use Symfony\Component\Yaml\Yaml;
+namespace Deployer;
 
-require 'vendor/autoload.php';
-require 'vendor/deployer/deployer/recipe/common.php'; // assumes deployer installed locally
-//require 'recipe/common.php'; // assumes deployer installed locally
-require 'vendor/deployphp/recipes/recipes/configure.php';
+require('recipe/common.php');
+require('vendor/regiomedia/deployer-recipe-check/check.php');
+require('vendor/regiomedia/deployer-recipe-sync/sync.php');
 
-// Set deployment configuration
-set('repository', ''); // DON'T FORGET REPOSITORY URL
-set('writable_dirs', []);
-set('clear_paths', []);
-set('clear_use_sudo', false);
-set('keep_releases', 5);
-set('default_stage', 'dev');
+set('ssh_type', 'native');
+set('ssh_multiplexing', true);
+
+set('repository', 'git@domain.com:username/repository.git');
 set('shared_dirs', ['core/bitrix', 'core/upload']);
-set('shared_files', false);
-set('sync_excludes', ['cache', 'managed_cache', 'stack_cache', 'resize_cache', 'tmp', '.settings.php', '"php_interface/dbconn.php"']);
-set('sync_dirs', ['bitrix', 'upload']);
-
-option('source-server', null, \Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL, 'Server to get data from.');
-option('dest-path', null, \Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL, 'Path to save sync directories to.');
-
-task(
-    "sync:db",
-    function () {
-
-        $serverList = $serverInfo = Yaml::parse(file_get_contents(__DIR__.'/stage/servers.yml'));
-
-        $sourceServerKey = null;
-        if (input()->hasOption('source-server')) {
-            $sourceServerKey = input()->getOption('source-server');
-        }
-
-        $sourceServer = $serverList[$sourceServerKey];
-        $destServer = $serverList[env('server.name')];
-
-        run(escapeshellcmd("ssh -p {$sourceServer['port']}  {$sourceServer['user']}@{$sourceServer['host']} 'mysqldump --default-character-set=utf8 -h {$sourceServer['app']['mysql']['host']} -u {$sourceServer['app']['mysql']['username']} -p{$sourceServer['app']['mysql']['password']} {$sourceServer['app']['mysql']['dbname']}  --skip-lock-tables --add-drop-table'"). " | ". escapeshellcmd("mysql -h {$destServer['app']['mysql']['host']} -u{$destServer['app']['mysql']['username']}  -p{$destServer['app']['mysql']['password']} {$destServer['app']['mysql']['dbname']}"), 0);
-    }
-)->onlyOn('dev');
-
-task(
-    "sync:dirs",
-    function () {
-
-        $serverList = $serverInfo = Yaml::parse(file_get_contents(__DIR__.'/stage/servers.yml'));
-
-        $sourceServerKey = null;
-        if (input()->hasOption('source-server')) {
-            $sourceServerKey = input()->getOption('source-server');
-        }
-
-        $destPath = null;
-        if (input()->hasOption('dest-path')) {
-            $destPath = input()->getOption('dest-path');
-        }
-        $sourceServer = $serverList[$sourceServerKey];
-        $destServer = $serverList[env('server.name')];
-
-
-        foreach (get('sync_dirs') as $dir) {
-            $excludeString = '';
-            foreach (get('sync_excludes') as $exclude) {
-                $excludeString .= " --exclude=$exclude ";
-            }
-
-            run("rsync -e \"ssh -p {$sourceServer['port']}\" -avz --delete {$sourceServer['user']}@${sourceServer['host']}:${sourceServer['webroot']}/$dir/ $destPath/$dir $excludeString", 0);
-        }
-    }
-);
-
-task(
-    'sync',
-    [
-        'sync:dirs',
-        'sync:db'
-    ]
-);
-
-task('mv_local_config', function(){
-    run('mkdir -p ./core/bitrix/php_interface/');
-    run("mv ./shared/core/bitrix/php_interface/dbconn.php ./core/bitrix/php_interface/" );
-    run("mv ./shared/core/bitrix/.settings.php ./core/bitrix/" );
-})->onlyOn('dev');
+set('restart_cmd', 'sudo /usr/sbin/service apache2 restart');
 
 task('deploy:migrate', function() {
     cd('{{release_path}}');
@@ -89,23 +18,26 @@ task('deploy:migrate', function() {
     writeln('<info>' . $output . '</info>');
 });
 
-task(
-    'deploy',
-    [
-        'deploy:prepare',
-        'deploy:release',
-        'deploy:update_code',
-        'deploy:shared',
-        'deploy:configure',
-        'deploy:vendors',
-        'deploy:migrate',
-        'deploy:symlink',
-        'deploy:clean',
-        'cleanup',
-    ]
-)->desc('Deploy your project');
+task('deploy:restart', function() {
+    run('{{restart_cmd}}');
+});
 
-after('deploy:configure', 'mv_local_config');
-after('deploy', 'success');
+before('deploy:release', 'check:uncommited');
+before('deploy:release', 'check:unpushed');
 
-serverList(__DIR__.'/stage/servers.yml');
+task('sync:dirs')->onlyOn(['staging', 'dev']);
+task('sync:db')->onlyOn(['staging', 'dev']);
+
+after('deploy:release', 'sync');
+
+task('deploy', [
+    'deploy:prepare',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:vendors',
+    'deploy:migrate',
+    'deploy:symlink',
+    'deploy:restart',
+    'cleanup',
+]);

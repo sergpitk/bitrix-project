@@ -4,8 +4,38 @@
     },
 
     "require-dev": {
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "2.*",
+        "regiomedia/deployer-recipe-check": "dev-master",
+        "regiomedia/deployer-recipe-sync": "dev-master"
     },
+
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "regiomedia/deployer-recipe-check",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/regiomedia/deployer-recipe-check",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "regiomedia/deployer-recipe-sync",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/regiomedia/deployer-recipe-sync",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+
+    ],
 
     "scripts": {
         "lint:php": "php ./vendor/bin/phpcs --standard=PSR2  core/local/classes/**/*.php",

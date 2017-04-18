@@ -6,32 +6,77 @@ dev:
     branch: master
     local: true
     app:
-      mysql:
+      db:
+        name: username
+        user: username
+        password: ""
         host: localhost
-        username: awesome_db_username
-        dbname: awesome_db
-        password: awesome_db_password
-      cache: >
-        'cache' =>
-                    array(),
+    sync:
+        source-server: staging
+        source-path: /home/bitrix/www
+        dest-path: ./core
+        dirs:
+          - upload
+          - bitrix
+        excludes:
+          - cache
+          - managed_cache
+          - stack_cache
+          - resize_cache
+          - tmp
+          - .settings.php
+          - php_interface/dbconn.php
+
 staging:
-    host: awesome.bitrix-project.stg
+    host: staging.bitrix-project.dev
     port: 22
-    user: username_stg
+    user: www
     identity_file:
       public_key:  /home/username/.ssh/id_rsa.pub
       private_key: /home/username/.ssh/id_rsa
       password: ""
     stage: staging
-    deploy_path: /path/to/deploy
+    deploy_path: /home/bitrix/project
+    sync_path: /home/bitrix/project/shared
     branch: master
-    webroot: "/path/to/public_html"
     app:
-      mysql:
+      db:
+        name: username
+        user: username
+        password: ""
         host: localhost
-        username: awesome_db_username
-        dbname: awesome_db
-        password: awesome_db_password
-      cache: >
-        'cache' =>
-                    array(),
+    sync:
+        source-server: production
+        source-path: /home/bitrix/www
+        dest-path: ./shared/core
+        dirs:
+          - upload
+          - bitrix
+        excludes:
+          - cache
+          - managed_cache
+          - stack_cache
+          - resize_cache
+          - tmp
+          - .settings.php
+          - php_interface/dbconn.php
+
+production:
+    host: bitrix-project.dev
+    port: 22
+    user: bitrix
+    identity_file:
+      public_key:  /home/username/.ssh/id_rsa.pub
+      private_key: /home/username/.ssh/id_rsa
+      password: ""
+    stage: production
+    deploy_path: /home/bitrix/username/
+    sync_path: /home/bitrix/username/shared
+    branch: production
+    restart_cmd: "sudo /usr/sbin/service httpd restart"
+    app:
+      db:
+        name: username
+        user: username
+        password: ""
+        host: localhost
