@@ -3,8 +3,7 @@ import gulp from 'gulp';
 
 const bs = browserSync('server');
 
-//const HOST = process.env.HOST;
-const HOST = 'localhost';
+const HOST = process.env.HOST;
 
 gulp.task('server', () => (
     bs.init({

@@ -5,25 +5,45 @@
 
 ```
 .
-├── .arclint                # Файл-конфиг линтеров
-├── composer.json           # Внешние пхп-пакеты проекта, конфиг автозагрузчика классов
-├── composer.lock           #  
-├── core                    # Директория для файлов ядра (bitrix) и ресурсных файлов (upload)
-│   └── local               # Основная директория для самописных шаблонов/компонентов/классов
-├── deploy.php              # Конфигурация и команды утилиты deployer
-├── .eslintrc               # Конфиг линтера js-файлов
-├── .gitignore              # 
-├── migrator                # CLI-утилита для создания и применения миграций БД
-├── prebuild                # Заготовка для системы сборки gulp/webpack
-│   └── .gitkeep            #
-├── README.md               # Описание проекта 
-├── shared                  # Директория для шаблонов конфигурационных файлов
-│   └── sites               # 
-├── sites                   # Директория для хранения "сайтов"
-│   └── s1                  # Статичные файлы сайта и симлинки на служебные директории битрикс
-├── stage                   # 
-│   └── servers_example.yml # Пример файла конфигурации окружений для deployer
-└── .stylintrc              # Конфиг линтера styl-файлов
+├── .arclint
+├── .babelrc
+├── composer.json
+├── composer.lock
+├── core
+│   └── local
+│       ├── frontend-build-example
+│       ├── php_interface
+│       └── templates
+├── deploy.php
+├── .editorconfig
+├── .eslintrc
+├── .gitignore
+├── gulp
+│   ├── clean.js
+│   ├── default.js
+│   ├── images.js
+│   ├── scripts.js
+│   ├── server.js
+│   ├── styles.js
+│   └── watch.js
+├── gulpfile.babel.js
+├── migrator
+├── package.json
+├── README.md
+├── sites
+│   └── s1
+│       ├── 404.php
+│       ├── .access.php
+│       ├── auth
+│       ├── bitrix -> ../../core/bitrix
+│       ├── index.php
+│       ├── local -> ../../core/local
+│       ├── .section.php
+│       ├── upload -> ../../core/upload
+│       └── urlrewrite.php
+├── stage
+│   └── servers_example.yml
+└── .stylelintrc
 ```
 
 ## Необходимое ПО:
@@ -69,7 +89,7 @@
 
 `production` - основной сервер
 
-```
+```shell
 $ dep deploy staging
 ```
 
@@ -90,7 +110,7 @@ $ dep deploy staging
 
 Получить ядро (bitrix), ресурсы (upload) и базу c "дальнего" сайта:
 
-```
+```shell
 $ dep sync dev --source-server staging --dest-path core
 ```
 
@@ -100,3 +120,43 @@ $ dep sync dev --source-server staging --dest-path core
 то при отправке кода на ревью с помощью консольной утилиты [Arcanist](https://phacility.com/phabricator/arcanist/),
 Будет происходить его проверка на ошибки  в соответствии с конфигурационным файлом `.arclint`.
 [Подробней о линте и линтерах](https://secure.phabricator.com/book/phabricator/article/arcanist_lint/)
+
+## Фронтенд
+
+Сборка фронтенда осуществляется с помощью npm-скриптов (которые являются алиасами для gulp-тасков).
+
+Обрабатываются файлы в директориях  `core/loca/**/assets-raw`. Результаты сохраняются в "соседних" папках `core/loca/**/assets-done`.
+
+```shell
+$ npm run start    # запустить сборку в live-режиме
+$ npm run build    # один раз собрать файлы
+$ npm run styles   # сборка стилей
+$ npm run images   # оптимизация изображений
+$ npm run scripts  # сборка js-скриптов
+$ npm run clean    # удалить результаты сборки
+```
+
+- JS собирается с помощью `browserify` и `babel`
+- CSS обрабатывается `postCSS` плагинами:
+  - nested
+  - import
+  - assets
+  - sprites
+  - autoprefixer
+- изображения оптимизируются `gulp-imagemin`
+
+Также доступна проверка js-кода линтером ESLint
+
+```shell
+$ npm run lint:scripts  # показать ошибки
+$ npm run fix:scripts   # исправить ошибки
+```
+
+
+И проверка postcss-файлов утилитой Stylelint
+
+```shell
+$ npm run lint:styles  # показать ошибки
+$ npm run fix:styles   # исправить ошибки
+```
+
