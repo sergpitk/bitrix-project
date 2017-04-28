@@ -41,3 +41,5 @@ task('deploy', [
     'deploy:restart',
     'cleanup',
 ]);
+
+serverList(__DIR__.'/stage/servers.yml');
