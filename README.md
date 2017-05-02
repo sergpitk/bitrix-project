@@ -25,6 +25,7 @@
 │   ├── scripts.js
 │   ├── server.js
 │   ├── styles.js
+│   ├── svg.js
 │   └── watch.js
 ├── gulpfile.babel.js
 ├── migrator
@@ -135,6 +136,7 @@ $ npm run start    # запустить сборку в live-режиме
 $ npm run build    # один раз собрать файлы
 $ npm run styles   # сборка стилей
 $ npm run images   # оптимизация изображений
+$ npm run svg      # генерация svg-спрайта
 $ npm run scripts  # сборка js-скриптов
 $ npm run clean    # удалить результаты сборки
 ```
@@ -145,6 +147,7 @@ $ npm run clean    # удалить результаты сборки
   - import
   - assets
   - sprites
+  - inline-svg
   - autoprefixer
 - изображения оптимизируются `gulp-imagemin`
 
