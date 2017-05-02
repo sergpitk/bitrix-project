@@ -42,4 +42,4 @@ task('deploy', [
     'cleanup',
 ]);
 
-serverList(__DIR__.'/stage/servers.yml');
+serverList(__DIR__.'/servers.yml');
