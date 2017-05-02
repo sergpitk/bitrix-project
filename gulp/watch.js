@@ -21,6 +21,10 @@ gulp.task('watch', () => {
     ], () => runSequence('images', bs.reload));
 
     watch([
+        path + '/svg/*.svg'
+    ], () => runSequence('svg', bs.reload));
+
+    watch([
         path + '/scripts/**/*.es6'
     ], () => runSequence('scripts', bs.reload));    
 });

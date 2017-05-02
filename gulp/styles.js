@@ -7,6 +7,8 @@ import postcssNested from 'postcss-nested';
 import postcssImport from 'postcss-import';
 import postcssAssets from 'postcss-assets';
 import postcssSprites from 'postcss-sprites';
+import postcssInlineSvg from 'postcss-inline-svg';
+import postcssSvgo from 'postcss-svgo';
 import autoprefixer from 'autoprefixer';
 
 let spritesCfg = {
@@ -34,6 +36,8 @@ gulp.task('styles', () => (
                 postcssNested,
                 postcssImport,
                 postcssAssets,
+                postcssInlineSvg,
+                postcssSvgo,
                 postcssSprites(spritesCfg),
                 autoprefixer()
                 ]
