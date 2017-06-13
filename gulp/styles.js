@@ -3,13 +3,14 @@ import through from 'through2';
 import gulp from 'gulp';
 import rename from 'gulp-rename';
 import postcss from 'gulp-postcss';
-import postcssNested from 'postcss-nested';
+import postcssNext from "postcss-cssnext";
 import postcssImport from 'postcss-import';
 import postcssAssets from 'postcss-assets';
 import postcssSprites from 'postcss-sprites';
 import postcssInlineSvg from 'postcss-inline-svg';
 import postcssSvgo from 'postcss-svgo';
-import autoprefixer from 'autoprefixer';
+import lostGrid from 'lost';
+
 
 let spritesCfg = {
     spritePath: null,
@@ -26,25 +27,25 @@ let spritesCfg = {
 }
 
 gulp.task('styles', () => (
-        gulp.src('core/local/**/assets-raw/styles/*.pcss', {base: './'})
-            .pipe(through.obj(function (file, enc, cb) {
-                spritesCfg.stylesheetPath = path.dirname(file.path).replace('assets-raw', 'assets-done');
-                spritesCfg.spritePath = spritesCfg.stylesheetPath.replace('styles', 'images');
-                cb(null, file);
-            }))
-            .pipe(postcss([
-                postcssNested,
+    gulp.src('core/local/**/assets-raw/styles/*.pcss', {base: './', dot: true})
+        .pipe(through.obj(function (file, enc, cb) {
+            spritesCfg.stylesheetPath = path.dirname(file.path).replace('assets-raw', 'assets-done');
+            spritesCfg.spritePath = spritesCfg.stylesheetPath.replace('styles', 'images');
+            cb(null, file);
+        }))
+        .pipe(postcss([
                 postcssImport,
                 postcssAssets,
                 postcssInlineSvg,
                 postcssSvgo,
                 postcssSprites(spritesCfg),
-                autoprefixer()
-                ]
-            ))
-            .pipe(rename(function (path) {
-                path.dirname = path.dirname.replace('assets-raw', 'assets-done')
-                path.extname = '.css';
-            }))
-            .pipe(gulp.dest('./'))
+                lostGrid,
+                postcssNext
+            ]
+        ))
+        .pipe(rename(function (path) {
+            path.dirname = path.dirname.replace('assets-raw', 'assets-done')
+            path.extname = '.css';
+        }))
+        .pipe(gulp.dest('./'))
 ));

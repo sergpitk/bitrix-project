@@ -7,7 +7,7 @@ gulp.task('images', () => {
     gulp.src([
             'core/local/**/assets-raw/images/**',
             '!**/images/sprite/*'
-        ], {base: './'})
+        ], {base: './', dot: true})
         .pipe(imagemin())
         .pipe(rename(function (path) {
             path.dirname = path.dirname.replace('assets-raw', 'assets-done')

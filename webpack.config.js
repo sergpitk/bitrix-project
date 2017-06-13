@@ -1,7 +1,7 @@
 var path = require('path');
 var glob = require('glob');
 var WebpackAssetsManifest = require('webpack-assets-manifest');
-var files = glob.sync('./core/local/**/assets-raw/scripts/*.es6');
+var files = glob.sync('./core/local/**/assets-raw/scripts/*.es6', {dot: true});
 var entries = {};
 
 
@@ -15,8 +15,6 @@ export default function makeWebpackConfig({
         entries[entry.replace('assets-raw', 'assets-done').replace('.es6', '.js')] = entry;
     }
 
-
-    console.log(entries);
 
     const vueLoaderConfig = {
         loaders: {css: ['css-loader']},

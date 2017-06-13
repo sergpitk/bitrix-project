@@ -8,7 +8,7 @@ import symbols from 'gulp-svg-symbols';
 let destDir = '';
 
 gulp.task('svg', () => {
-    gulp.src('core/local/**/assets-raw/svg/*.svg', {base: './'})
+    gulp.src('core/local/**/assets-raw/svg/*.svg', {base: './', dot: true})
     .pipe(through.obj(function (file, enc, cb) {
         destDir =  path.dirname(file.path).replace('assets-raw', 'assets-done');
         cb(null, file);
