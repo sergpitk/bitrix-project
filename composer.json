@@ -40,5 +40,17 @@
     "scripts": {
         "lint:php": "php ./vendor/bin/phpcs --standard=PSR2  core/local/classes/**/*.php",
         "fix:php": "php ./vendor/bin/phpcbf --standard=PSR2  core/local/classes/**/*.php"
+    },
+
+    "autoload": {
+        "psr-4": {"Local\\" : "core/local/classes/"}
+    },
+
+    "extra": {
+        "installer-paths": {
+            "./core/bitrix/modules/{$name}/": ["type:bitrix-d7-module", "type:bitrix-module"],
+            "./core/bitrix/components/{$name}/": ["type:bitrix-d7-component", "type:bitrix-component"],
+            "./core/bitrix/templates/{$name}/": ["type:bitrix-d7-template", "type:bitrix-theme"]
+        }
     }
 }
