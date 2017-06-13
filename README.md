@@ -160,7 +160,7 @@ $ npm run clean    # удалить результаты сборки
 - изображения оптимизируются [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
 - svg-спрайт собирается плагином [gulp-svg-symbols](https://github.com/Hiswe/gulp-svg-symbols)
 
-Также доступна проверка js-кода линтером [ESLint](http://eslint.org/)
+Также доступна проверка js-кода линтером [ESLint](http://eslint.org/).  За основу набора правил взят [eslint-config-airbnb](https://github.com/airbnb/javascript)
 
 ```shell
 $ npm run lint:scripts  # показать ошибки
@@ -168,7 +168,7 @@ $ npm run fix:scripts   # исправить ошибки
 ```
 
 
-И проверка postcss-файлов утилитой [Stylelint](https://stylelint.io/). За основу набора правил взят Исправление ошибок осуществляется пакетом
+И проверка postcss-файлов утилитой [Stylelint](https://stylelint.io/). За основу набора правил взят [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) Исправление ошибок осуществляется пакетом [stylefmt](https://github.com/morishitter/stylefmt)
 
 ```shell
 $ npm run lint:styles  # показать ошибки
