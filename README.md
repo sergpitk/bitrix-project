@@ -43,7 +43,8 @@
 │       ├── .section.php
 │       ├── upload -> ../../core/upload
 │       └── urlrewrite.php
-└── .stylelintrc
+├── .stylelintrc
+└── webpack.config.js
 ```
 
 ## Необходимое ПО:
@@ -60,7 +61,8 @@
 `/home/bitrix/` - домашняя директория пользователя
 `/home/bitrix/www/` - директория с публичными файлами сайта
 
-- Развернуть (если еще нет) на сервере Битрикс
+- Развернуть (если еще нет) на сервере Битрикс.
+(Этот пункт первый, потому что скрипт `bitrixsetup.php` не умеет в симлинки для директории `bitrix`)
 - Клонировать репозиторий на сервер, например, в диеркторию `/home/bitrix/awesome-project/`
 - Удалить из него директорию `.git`
 - Выполнить `composer install`
@@ -125,6 +127,13 @@ $ dep sync dev --source-server staging --dest-path core
 Будет происходить его проверка на ошибки  в соответствии с конфигурационным файлом `.arclint`.
 [Подробней о линте и линтерах](https://secure.phabricator.com/book/phabricator/article/arcanist_lint/)
 
+Файлы `php` по адресу  `core/local/classes` можно проверить на соответствие стандарту [PSR-2](http://www.php-fig.org/psr/psr-2/) командой:
+
+```shell
+$ composer lint:php # покажет ошибки и предупреждения
+$ composer fix:php #  исправит ошибки
+```
+
 ## Фронтенд
 
 Сборка фронтенда осуществляется с помощью npm-скриптов (которые являются алиасами для gulp-тасков).
@@ -141,17 +150,17 @@ $ npm run scripts  # сборка js-скриптов
 $ npm run clean    # удалить результаты сборки
 ```
 
-- JS собирается с помощью `browserify` и `babel`
-- CSS обрабатывается `postCSS` плагинами:
-  - nested
-  - import
-  - assets
-  - sprites
-  - inline-svg
-  - autoprefixer
-- изображения оптимизируются `gulp-imagemin`
+- JS собирается с помощью [webpack 2](https://webpack.js.org/) c поддержкой [Vue.js компонентов](https://vue-loader.vuejs.org/)
+- CSS обрабатывается [PostCSS](http://postcss.org/) плагинами:
+  - [cssnext](http://cssnext.io/)
+  - [import](https://github.com/postcss/postcss-import)
+  - [assets](https://github.com/borodean/postcss-assets)
+  - [sprites](https://github.com/2createstudio/postcss-sprites)
+  - [inline-svg](https://github.com/TrySound/postcss-inline-svg)
+- изображения оптимизируются [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
+- svg-спрайт собирается плагином [gulp-svg-symbols](https://github.com/Hiswe/gulp-svg-symbols)
 
-Также доступна проверка js-кода линтером ESLint
+Также доступна проверка js-кода линтером [ESLint](http://eslint.org/)
 
 ```shell
 $ npm run lint:scripts  # показать ошибки
@@ -159,7 +168,7 @@ $ npm run fix:scripts   # исправить ошибки
 ```
 
 
-И проверка postcss-файлов утилитой Stylelint
+И проверка postcss-файлов утилитой [Stylelint](https://stylelint.io/). За основу набора правил взят Исправление ошибок осуществляется пакетом
 
 ```shell
 $ npm run lint:styles  # показать ошибки
