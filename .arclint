@@ -5,13 +5,13 @@
       "include": "(\\.php$)"
     },
     "phpcs": {
-        "type": "phpcs",
-        "include": "/core\\/local\\/classes\\/.*\\.php/i",
-        "phpcs.standard": "PSR2",
-        "severity": {
-            "PHPCS.W.Generic.Files.LineLength.TooLong": "advice"
-        },
-        "bin": ["./vendor/bin/phpcs"]
+      "type": "phpcs",
+      "include": "/core\\/local\\/classes\\/.*\\.php/i",
+      "phpcs.standard": "PSR2",
+      "severity": {
+        "PHPCS.W.Generic.Files.LineLength.TooLong": "advice"
+      },
+      "bin": ["./vendor/bin/phpcs"]
     },
     "json": {
       "type": "json",

@@ -1,34 +1,40 @@
 import gulp from 'gulp';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import source from 'vinyl-source-stream2';
-import rename from 'gulp-rename';
-import es from 'event-stream';
-import glob from 'glob';
+import errorHandler from 'gulp-plumber-error-handler';
+import statsLogger from 'webpack-stats-logger';
+import webpack from 'webpack';
+import makeWebpackConfig from '../webpack.config.js';
 
 
-gulp.task('scripts', (done) => (
-    glob('core/local/**/assets-raw/scripts/*.es6',  function(err, files) {
-        if(err) done(err);
 
-        var tasks = files.map(function(entry) {
-            console.log(entry);
-            return browserify({
-                entries: [entry]
-            })
-                .transform(babelify)
-                .bundle()
-                .pipe(source({
-                    path: entry,
-                    base: './'
-                })
-                )
-                .pipe(rename(function (path) {
-                    path.dirname = path.dirname.replace('assets-raw', 'assets-done');
-                    path.extname = '.js';
-                }))
-                .pipe(gulp.dest('./'));
+const scriptsErrorHandler = errorHandler('Error in \'scripts\' task');
+
+
+function runWebpack(watch = false) {
+    return function (callback) {
+
+
+
+
+        const webpackConfig = makeWebpackConfig({watch})
+
+
+        return webpack(webpackConfig, (error, stats) => {
+                const jsonStats = stats.toJson();
+        if (jsonStats.errors.length) {
+            jsonStats.errors.forEach(message => {
+                scriptsErrorHandler.call({emit() {/* noop */}}, {message});
         });
-        es.merge(tasks).on('end', done);
-    })
-));
+        }
+        statsLogger(error, stats);
+
+        //solve the issue https://github.com/CSSSR/csssr-project-template/issues/169
+        if (watch === false) {
+            callback();
+        }
+    });
+    };
+}
+
+gulp.task('scripts', runWebpack(false));
+
+gulp.task('scripts:watch', runWebpack(true));

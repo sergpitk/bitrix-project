@@ -10,21 +10,20 @@ const path = 'core/local/**/assets-raw';
 gulp.task('watch', () => {
     global.watch = true;
 
-    watch([
-            path + '/styles/**/*.pcss'
-            ], () => {
-        runSequence('styles', bs.reload);
-    });
+watch([
+    path + '/styles/**/*.pcss'
+], () => {
+    runSequence('styles', bs.reload);
+});
 
-    watch([
-        path + '/images/**/*.*'
-    ], () => runSequence('images', bs.reload));
+watch([
+    path + '/images/**/*.*'
+], () => runSequence('images', bs.reload));
 
-    watch([
-        path + '/svg/*.svg'
-    ], () => runSequence('svg', bs.reload));
+watch([
+    path + '/svg/*.svg'
+], () => runSequence('svg', bs.reload));
 
-    watch([
-        path + '/scripts/**/*.es6'
-    ], () => runSequence('scripts', bs.reload));    
+gulp.start('scripts:watch');
+
 });
